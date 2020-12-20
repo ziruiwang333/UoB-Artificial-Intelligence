@@ -1,4 +1,4 @@
-# Artificial Intelligence Assignments
+# University of Birmingham Artificial Intelligence Course
 
 ### There are 4 different parts in 4 different branchs of Artificial Intelligence course under this repository.
 
