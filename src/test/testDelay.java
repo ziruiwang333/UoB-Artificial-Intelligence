@@ -1,0 +1,44 @@
+package test;
+
+import lejos.hardware.BrickFinder;
+import lejos.hardware.Keys;
+import lejos.hardware.ev3.EV3;
+import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.port.MotorPort;
+import lejos.robotics.chassis.Chassis;
+import lejos.robotics.chassis.Wheel;
+import lejos.robotics.chassis.WheeledChassis;
+import lejos.robotics.navigation.MovePilot;
+import lejos.utility.Delay;
+
+public class testDelay {
+
+	public static void main(String[] args) {
+		EV3LargeRegulatedMotor aEv3LargeRegulatedMotor= new EV3LargeRegulatedMotor(MotorPort.A);
+		EV3LargeRegulatedMotor bEv3LargeRegulatedMotor = new EV3LargeRegulatedMotor(MotorPort.B);
+		EV3 ev3Brick = (EV3) BrickFinder.getLocal();
+		Keys buttons = ev3Brick.getKeys();
+		buttons.waitForAnyPress();
+
+		TextLCD lcddisplay = ev3Brick.getTextLCD();
+
+		Wheel wheel1 = WheeledChassis.modelWheel(aEv3LargeRegulatedMotor, 56).offset(65);
+		Wheel wheel2 = WheeledChassis.modelWheel(bEv3LargeRegulatedMotor, 56).offset(-65);
+
+		Chassis chassis = new WheeledChassis(new Wheel[] { wheel1, wheel2 }, WheeledChassis.TYPE_DIFFERENTIAL);
+		MovePilot pilot = new MovePilot(chassis);
+		
+		
+		
+		while (true) {
+			pilot.setLinearSpeed(80);
+			pilot.forward();
+			Delay.msDelay(5000);
+			pilot.stop();
+			Delay.msDelay(500);
+		}
+		
+	}
+
+}
